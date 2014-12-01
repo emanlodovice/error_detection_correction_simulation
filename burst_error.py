@@ -46,9 +46,16 @@ class BurstErrorCorrection(object):
 
     def correct_error(self):
         code_word_length = len(self.hamming[0].bits)
-        for i in range(0, code_word_length):
-            for h in self.hamming:
-                self.sent.append(h.bits[i])
+        hamming_count = len(self.hamming)
+        for index, d in enumerate(self.received):
+            self.hamming[index % hamming_count].received.append(d)
+        self.retrieved_data = []
+        for h in self.hamming:
+            print "received hamming code: %r" % h.received
+            corrected = h.correct_error()
+            self.retrieved_data += corrected
+        print self.retrieved_data
+        return self.retrieved_data
 
 
 b = BurstErrorCorrection()
@@ -56,3 +63,4 @@ b.generate_bits()
 b.initialize_hamming_code()
 b.simulate_send()
 b.induce_burst_error()
+b.correct_error()

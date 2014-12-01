@@ -60,6 +60,7 @@ class HammingCode(object):
             else:
                 self.received[index] = 0
             print 'Data code after correction: %r' % self.received[0:4]
+        return self.received[0:4]
 
 
 # h = HammingCode()
