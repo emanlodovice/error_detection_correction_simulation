@@ -10,10 +10,6 @@ class Parity(object):
 
     def append_even_parity(self):
         self.is_even_parity = True
-        # is_even = True
-        # for i in self.bits:
-        #     if i == 1:
-        #         is_even = not is_even
         ones = self._count_ones(self.bits)
         if ones % 2 == 0:
             self.bits.append(0)
